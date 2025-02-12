@@ -3,7 +3,6 @@ import {
   Routes,
   Route,
   Navigate
-
   /* createBrowserRouter,
   RouterProvider */
 } from 'react-router-dom';
