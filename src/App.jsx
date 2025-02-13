@@ -46,7 +46,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       {/*  react-query dev tools */}
-      <ReactQueryDevtools />
+      <ReactQueryDevtools initialIsOpen={false} />
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
