@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-/* eslint-disable no-unused-vars */
 
 import { formatCurrency } from '../../utils/helpers';
 
@@ -43,17 +42,16 @@ const Discount = styled.div`
 `;
 
 function CabinRow({ cabin }) {
-  console.log(cabin);
-  // const { name, maxCapacity, regularPrice, discount, image } = cabin;
+  const { name, maxCapacity, regularPrice, discount, image } = cabin;
   return (
     <TableRow role="row">
       Table Row
-      {/* <Img src={image} />
+      <Img src={image} />
       <Cabin>{name}</Cabin>
       <div>Fits up to {maxCapacity}</div>
       <Price>{formatCurrency(regularPrice)}</Price>
       <Discount>{formatCurrency(discount)}</Discount>
-      <button>Delete</button> */}
+      <button>Delete</button>
     </TableRow>
   );
 }

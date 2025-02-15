@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
+/* eslint-disable no-unused-vars */
 import { useQuery } from '@tanstack/react-query';
 import { getCabins } from '../../services/apiCabins';
 
 import Spinner from '../../ui/spinner';
-
-import CabinRow from './CabinRow';
+import CabinRow from '../cabins/CabinRow';
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -61,5 +61,9 @@ function CabinTable() {
     </Table>
   );
 }
+
+/* CabinTable.propTypes = {
+  cabin: PropTypes.object.isRequired // or a more detailed shape
+}; */
 
 export default CabinTable;
