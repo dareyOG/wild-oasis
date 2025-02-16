@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-/* eslint-disable no-unused-vars */
 import { useQuery } from '@tanstack/react-query';
 import { getCabins } from '../../services/apiCabins';
 
