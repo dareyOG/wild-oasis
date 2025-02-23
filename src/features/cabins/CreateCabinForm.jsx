@@ -1,9 +1,3 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
-
-import { createUpdateCabin } from '../../services/apiCabins';
-
 import Input from '../../ui/Input';
 import Form from '../../ui/Form';
 import Button from '../../ui/Button';
@@ -11,7 +5,17 @@ import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
 import FormRow from '../../ui/FormRow';
 
+import { useForm } from 'react-hook-form';
+import { useCreateCabin } from './useCreateCabin';
+import { useUpdateCabin } from './useUpdateCabin';
+// import { useMutation, useQueryClient } from '@tanstack/react-query';
+// import toast from 'react-hot-toast';
+// import { createUpdateCabin } from '../../services/apiCabins';
+
 function CreateCabinForm({ cabinEdit = {} }) {
+  const { isCreating, createCabin } = useCreateCabin();
+  const { isUpdating, updateCabin } = useUpdateCabin();
+
   const { id: editCabinId, ...editCabinValues } = cabinEdit;
 
   // check if form is being used to ADD or EDIT cabin
@@ -24,9 +28,9 @@ function CreateCabinForm({ cabinEdit = {} }) {
 
   const { errors } = formState;
 
-  const queryClient = useQueryClient();
+  /*  const queryClient = useQueryClient();
 
-  const { isLoading: isCreating, mutate: Createcabin } = useMutation({
+  const { isLoading: isCreating, mutate: createCabin } = useMutation({
     mutationFn: createUpdateCabin,
 
     onSuccess: () => {
@@ -38,9 +42,9 @@ function CreateCabinForm({ cabinEdit = {} }) {
     },
 
     onError: error => toast.error(error.message)
-  });
+  }); */
 
-  const { isLoading: isUpdating, mutate: Updatecabin } = useMutation({
+  /*   const { isLoading: isUpdating, mutate: updateCabin } = useMutation({
     mutationFn: ({ newCabin, id }) => createUpdateCabin(newCabin, id),
 
     onSuccess: () => {
@@ -52,7 +56,7 @@ function CreateCabinForm({ cabinEdit = {} }) {
     },
 
     onError: error => toast.error(error.message)
-  });
+  }); */
 
   const onSubmit = data => {
     // console.log({ ...data, image: data.image[0] });
@@ -64,9 +68,9 @@ function CreateCabinForm({ cabinEdit = {} }) {
     const image = typeof data.image === 'string' ? data.image : data.image[0];
 
     if (isEdit) {
-      Updatecabin({ newCabin: { ...data, image }, id: editCabinId });
+      updateCabin({ newCabin: { ...data, image }, id: editCabinId }, { onSuccess: () => reset() });
     } else {
-      Createcabin({ ...data, image });
+      createCabin({ ...data, image }, { onSuccess: () => reset() });
     }
   };
 
@@ -135,10 +139,7 @@ function CreateCabinForm({ cabinEdit = {} }) {
         />
       </FormRow>
 
-      <FormRow
-        label={'Description for website'}
-        disabled={isLoading}
-        error={errors?.description?.message}>
+      <FormRow label={'Description for website'} error={errors?.description?.message}>
         <Textarea
           type="number"
           id="description"
