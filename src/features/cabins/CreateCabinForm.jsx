@@ -62,7 +62,7 @@ function CreateCabinForm({ cabinEdit = {} }) {
     // console.log({ ...data, image: data.image[0] });
     // mutate({ ...data, image: data.image[0] });
 
-    // console.log(data);
+    console.log(data);
 
     // check if image path is a string
     const image = typeof data.image === 'string' ? data.image : data.image[0];
@@ -134,7 +134,8 @@ function CreateCabinForm({ cabinEdit = {} }) {
           {...register('discount', {
             required: 'This field is required',
             validate: value =>
-              value < getValues().regularPrice || 'discount should be less than regular price'
+              Number(value) < Number(getValues().regularPrice) ||
+              'discount should be less than regular price'
           })}
         />
       </FormRow>
