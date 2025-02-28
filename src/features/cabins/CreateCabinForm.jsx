@@ -12,7 +12,7 @@ import { useUpdateCabin } from './useUpdateCabin';
 // import toast from 'react-hot-toast';
 // import { createUpdateCabin } from '../../services/apiCabins';
 
-function CreateCabinForm({ cabinEdit = {} }) {
+function CreateCabinForm({ cabinEdit = {}, onCloseModal }) {
   const { isCreating, createCabin } = useCreateCabin();
   const { isUpdating, updateCabin } = useUpdateCabin();
 
@@ -62,7 +62,7 @@ function CreateCabinForm({ cabinEdit = {} }) {
     // console.log({ ...data, image: data.image[0] });
     // mutate({ ...data, image: data.image[0] });
 
-    console.log(data);
+    // console.log(data);
 
     // check if image path is a string
     const image = typeof data.image === 'string' ? data.image : data.image[0];
@@ -70,7 +70,15 @@ function CreateCabinForm({ cabinEdit = {} }) {
     if (isEdit) {
       updateCabin({ newCabin: { ...data, image }, id: editCabinId }, { onSuccess: () => reset() });
     } else {
-      createCabin({ ...data, image }, { onSuccess: () => reset() });
+      createCabin(
+        { ...data, image },
+        {
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          }
+        }
+      );
     }
   };
 
@@ -81,7 +89,7 @@ function CreateCabinForm({ cabinEdit = {} }) {
   const isLoading = isCreating || isUpdating;
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form onSubmit={handleSubmit(onSubmit, onError)} type={onCloseModal ? 'modal' : 'regular'}>
       {/* <FormRow>
           <Label htmlFor="name">Cabin name</Label>
           <Input
@@ -160,7 +168,7 @@ function CreateCabinForm({ cabinEdit = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button variation="secondary" type="reset" onClick={() => onCloseModal?.()}>
           Cancel
         </Button>
         <Button disabled={isCreating}>{isEdit ? 'Edit cabin' : 'Create new cabin'}</Button>
