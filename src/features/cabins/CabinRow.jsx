@@ -13,6 +13,7 @@ import { HiSquare2Stack, HiTrash, HiPencil } from 'react-icons/hi2';
 
 import { formatCurrency } from '../../utils/helpers';
 import Modal from '../../ui/Modal';
+import ConfirmDelete from '../../ui/ConfirmDelete';
 
 const TableRow = styled.div`
   display: grid;
@@ -95,9 +96,21 @@ function CabinRow({ cabin }) {
           </Modal.Window>
         </Modal>
 
-        <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
-          <HiTrash />
-        </button>
+        {/* delete modal */}
+        <Modal>
+          <Modal.Open>
+            <button>
+              <HiTrash />
+            </button>
+          </Modal.Open>
+          <Modal.Window>
+            <ConfirmDelete
+              resourceName={'cabin'}
+              disabled={isDeleting}
+              onConfirm={() => deleteCabin(cabinId)}
+            />
+          </Modal.Window>
+        </Modal>
       </div>
     </TableRow>
   );
