@@ -7,6 +7,7 @@ import Row from '../ui/Row';
 
 import CabinTable from '../features/cabins/CabinTable';
 import AddCabin from '../features/cabins/AddCabin';
+import CabinsTableOperations from '../features/cabins/CabinsTableOperations';
 // import CreateCabinForm from '../features/cabins/CreateCabinForm';
 
 function Cabins() {
@@ -16,7 +17,7 @@ function Cabins() {
     <>
       <Row type="horizontal">
         <Heading as="h1">All cabins</Heading>
-        <p>Filter / Sort</p>
+        <CabinsTableOperations />
       </Row>
 
       <Row>
