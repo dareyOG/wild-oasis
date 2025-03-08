@@ -18,6 +18,7 @@ function CabinTable() {
   const filterValue = searchParams.get('discount') || 'all';
   // console.log(filterValue);
 
+  // filter cabins based on discount
   let filteredCabins;
   if (filterValue === 'no_discount') {
     filteredCabins = cabins.filter(cabin => cabin.discount === 0);
@@ -26,6 +27,19 @@ function CabinTable() {
   } else {
     filteredCabins = cabins;
   }
+
+  // sort cabins
+  const sortBy = searchParams.get('sortBy') || '';
+  const [field, order] = sortBy.split('-');
+  // console.log(field, order);
+
+  const modifier = order === 'asc' ? 1 : -1;
+  const sortedCabins = filteredCabins.sort((a, b) => {
+    if (field === 'name') {
+      return a.name.localeCompare(b.name) * modifier;
+    }
+    return (a[field] - b[field]) * modifier;
+  });
 
   return (
     <Menus>
@@ -41,7 +55,8 @@ function CabinTable() {
 
         {/* <Table.Body data={cabins} render={cabin => <CabinRow cabin={cabin} key={cabin.id} />} /> */}
         <Table.Body
-          data={filteredCabins}
+          // data={filteredCabins}
+          data={sortedCabins}
           render={cabin => <CabinRow cabin={cabin} key={cabin.id} />}
         />
       </Table>
