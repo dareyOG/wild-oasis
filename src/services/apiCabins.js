@@ -39,7 +39,7 @@ export async function createCabin(newCabin) {
   if (storageError) {
     await supabase.from('cabins').delete().eq('id', data.id);
 
-    console.error(storageError);
+    // console.error(storageError);
     throw new Error('Cabin image could not be uploaded');
   }
   return data;
@@ -82,7 +82,7 @@ export async function updateCabin(cabin) {
   if (storageError) {
     await supabase.from('cabins').delete().eq('id', data.id);
 
-    console.error(storageError);
+    // console.error(storageError);
     throw new Error('Cabin image could not be uploaded');
   }
   return data;
@@ -130,7 +130,7 @@ export async function createUpdateCabin(newCabin, id) {
   if (storageError) {
     await supabase.from('cabins').delete().eq('id', data.id);
 
-    console.error(storageError);
+    // console.error(storageError);
     throw new Error('Cabin image could not be uploaded');
   }
   return data;
