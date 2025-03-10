@@ -15,11 +15,20 @@ export function useBookings() {
       ? null
       : { field: 'status', value: filterValue, method: 'gte' }; */
 
+  // server-side sorting
+  const sort = searchparams.get('sortBy') || 'startDate-desc';
+  const [field, order] = sort.split('-');
+  // console.log(field, order);
+  const sortBy = { field, order };
+
   const {
     data: bookings,
     isLoading,
     error
-  } = useQuery({ queryKey: ['bookings', filter], queryFn: () => getBookings({ filter }) });
+  } = useQuery({
+    queryKey: ['bookings', filter, sortBy],
+    queryFn: () => getBookings({ filter, sortBy })
+  });
 
   return { bookings, isLoading, error };
 }
