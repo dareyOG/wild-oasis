@@ -17,6 +17,7 @@ import AppLayout from './ui/AppLayout';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import Bookings from './pages/Bookings';
+import Booking from './pages/Booking';
 import Cabins from './pages/Cabins';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
@@ -73,7 +74,9 @@ function App() {
             <Route index element={<Navigate replace to={'dashboard'} />} />{' '}
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="account" element={<Account />} />
-            <Route path="bookings" element={<Bookings />} />
+            <Route path="bookings" element={<Bookings />}>
+              <Route path="bookings/:bookingId" element={<Booking />} />
+            </Route>
             <Route path="cabins" element={<Cabins />} />
             <Route path="settings" element={<Settings />} />
             <Route path="users" element={<Users />} />
