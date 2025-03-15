@@ -11,6 +11,7 @@ import GlobalStyles from './styles/GlobalStyles';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Toaster } from 'react-hot-toast';
 
 import AppLayout from './ui/AppLayout';
 
@@ -18,21 +19,34 @@ import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import Bookings from './pages/Bookings';
 import Booking from './pages/Booking';
+import Checkin from './pages/Checkin';
 import Cabins from './pages/Cabins';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
 import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
-import { Toaster } from 'react-hot-toast';
 
 /* const router = createBrowserRouter([
-  { element: <Dashboard />, path: 'dashboard' },
-  { element: <Account />, path: 'account' },
-  { element: <Bookings />, path: 'bookings' },
-  { element: <Cabins />, path: 'cabins' },
-  { element: <Login />, path: 'login' },
-  { element: <Settings />, path: 'settings' },
-  { element: <Users />, path: 'users' },
+  {
+    element: <AppLayout />,
+    path: 'dashboard',
+    children: [
+      { element: <Dashboard />, path: 'dashboard' },
+      { element: <Account />, path: 'account' },
+      {
+        element: <Bookings />,
+        path: 'bookings',
+        children: [
+          { element: <Booking />, path: 'bookings/:bookingId' },
+          { element: <Checkin />, path: 'checkin/:bookingId' }
+        ]
+      },
+      { element: <Cabins />, path: 'cabins' },
+      { element: <Login />, path: 'login' },
+      { element: <Settings />, path: 'settings' },
+      { element: <Users />, path: 'users' }
+    ]
+  },
   { element: <PageNotFound />, path: '*' }
 ]); */
 
@@ -74,9 +88,9 @@ function App() {
             <Route index element={<Navigate replace to={'dashboard'} />} />{' '}
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="account" element={<Account />} />
-            <Route path="bookings" element={<Bookings />}>
-              <Route path="bookings/:bookingId" element={<Booking />} />
-            </Route>
+            <Route path="bookings" element={<Bookings />} />
+            <Route path="bookings/:bookingId" element={<Booking />} />
+            <Route path="checkin/:bookingId" element={<Checkin />} />
             <Route path="cabins" element={<Cabins />} />
             <Route path="settings" element={<Settings />} />
             <Route path="users" element={<Users />} />

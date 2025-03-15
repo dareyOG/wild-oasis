@@ -2,11 +2,11 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getBooking } from '../../services/apiBookings';
 
-export function useCabins() {
+export function useBooking() {
   const [bookingId] = useParams();
 
   const { data: booking, isLoading } = useQuery({
-    queryKey: ['booking'],
+    queryKey: ['booking', bookingId],
     queryFn: () => getBooking(bookingId),
     retry: false // prevent booking data from getting re-fetched in cases it doesn't exist
   });

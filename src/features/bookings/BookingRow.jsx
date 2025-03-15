@@ -8,7 +8,7 @@ import Menus from '../../ui/Menus';
 import { format, isToday } from 'date-fns';
 
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
-import { HiEye } from 'react-icons/hi2';
+import { HiArrowDownOnSquare, HiEye } from 'react-icons/hi2';
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -79,16 +79,24 @@ function BookingRow({
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>{status.replace('-', ' ')}</Tag>
+      <Tag type={statusToTagName[status]}>{status?.replace('-', ' ')}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
 
       <Menus.Menu>
         <Menus.Toggle id={bookingId} />
-        <Menus.List id={bookingId} />
-        <Menus.Button icon={<HiEye />} onClick={() => navigate(`/bookings/${bookingId}`)}>
-          See details
-        </Menus.Button>
+        <Menus.List id={bookingId}>
+          <Menus.Button icon={<HiEye />} onClick={() => navigate(`/bookings/${bookingId}`)}>
+            See details
+          </Menus.Button>
+          {status === 'unconfirmed' && (
+            <Menus.Button
+              icon={<HiArrowDownOnSquare />}
+              onClick={() => navigate(`/checkin/${bookingId}`)}>
+              Check in
+            </Menus.Button>
+          )}
+        </Menus.List>
       </Menus.Menu>
     </Table.Row>
   );

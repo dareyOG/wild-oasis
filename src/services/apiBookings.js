@@ -55,7 +55,7 @@ export async function getBooking(id) {
     .single();
 
   if (error) {
-    console.error(error);
+    // console.error(error);
     throw new Error('Booking not found');
   }
 
