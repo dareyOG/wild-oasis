@@ -15,5 +15,6 @@ export function useUpdateCabin() {
 
     onError: error => toast.error(error.message)
   });
+
   return { isUpdating, updateCabin };
 }
