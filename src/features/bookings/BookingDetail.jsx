@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useBooking } from './useBooking';
 import { useCheckOut } from '../check-in-out/useCheckOut';
 import { useMoveBack } from '../../hooks/useMoveBack';
+import { useDeleteBooking } from './useDeleteBooking';
 
 import BookingDataBox from './BookingDataBox';
 
@@ -14,6 +15,8 @@ import ButtonGroup from '../../ui/ButtonGroup';
 import Button from '../../ui/Button';
 import ButtonText from '../../ui/ButtonText';
 import Spinner from '../../ui/spinner';
+import Modal from '../../ui/Modal';
+import ConfirmDelete from '../../ui/ConfirmDelete';
 
 import { HiArrowUpOnSquare } from 'react-icons/hi2';
 
@@ -27,6 +30,7 @@ function BookingDetail() {
   const navigate = useNavigate();
   const { booking, isLoading } = useBooking();
   const { isCheckingOut, checkOut } = useCheckOut();
+  const { isDeleting, deleteBooking } = useDeleteBooking();
   const moveBack = useMoveBack();
 
   const { id: bookingId, status } = booking;
@@ -59,13 +63,22 @@ function BookingDetail() {
         {status === 'checked-in' && (
           <Button
             icon={<HiArrowUpOnSquare />}
-            onClick={() => {
-              checkOut(bookingId);
-            }}
+            onClick={() => checkOut(bookingId)}
             disabled={isCheckingOut}>
             Check out
           </Button>
         )}
+
+        <Modal.Window>
+          <Button>
+            <ConfirmDelete
+              resourceName={'booking'}
+              // onSettled - regardless of the outcome (success or error)
+              onConfirm={() => deleteBooking(bookingId, { onSettled: () => navigate(-1) })}
+              disabled={isDeleting}
+            />
+          </Button>
+        </Modal.Window>
 
         <Button variation="secondary" onClick={moveBack}>
           Back
