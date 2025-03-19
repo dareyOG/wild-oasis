@@ -19,7 +19,7 @@ import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import Bookings from './pages/Bookings';
 import Booking from './pages/Booking';
-import Checkin from './pages/Checkin';
+import CheckIn from './pages/CheckIn';
 import Cabins from './pages/Cabins';
 import Login from './pages/Login';
 import Settings from './pages/Settings';
@@ -62,7 +62,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {/*  react-query dev tools */}
+      {/* react-query dev tools */}
       <ReactQueryDevtools initialIsOpen={false} />
       <GlobalStyles />
       <Toaster
@@ -90,7 +90,7 @@ function App() {
             <Route path="account" element={<Account />} />
             <Route path="bookings" element={<Bookings />} />
             <Route path="bookings/:bookingId" element={<Booking />} />
-            <Route path="checkin/:bookingId" element={<Checkin />} />
+            <Route path="checkin/:bookingId" element={<CheckIn />} />
             <Route path="cabins" element={<Cabins />} />
             <Route path="settings" element={<Settings />} />
             <Route path="users" element={<Users />} />

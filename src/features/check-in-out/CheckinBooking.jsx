@@ -16,6 +16,7 @@ import Checkbox from '../../ui/Checkbox';
 
 import { formatCurrency } from '../../utils/helpers';
 import { useSettings } from '../settings/useSettings';
+import { useParams } from 'react-router-dom';
 
 const Box = styled.div`
   /* Box */
@@ -26,10 +27,11 @@ const Box = styled.div`
 `;
 
 function CheckinBooking() {
+  const { bookingId } = useParams();
   const [confirmPaid, setConfirmedPaid] = useState(false);
   const [addBreakfast, setAddBreakfast] = useState(false);
 
-  const { booking, isLoading } = useBooking();
+  const { booking, isLoading } = useBooking(bookingId);
   const { isCheckingIn, checkIn } = useCheckIn();
   const { settings, isLoading: isLoadingSettings } = useSettings();
   const moveBack = useMoveBack();
@@ -39,8 +41,16 @@ function CheckinBooking() {
   }, [booking]);
 
   if (isLoading || isLoadingSettings) return <Spinner />;
+  console.log(booking);
 
-  const { id: bookingId, guests, totalPrice, numGuests, hasBreakfast, numNights } = booking;
+  const {
+    // id: bookingId,
+    guests,
+    totalPrice,
+    numGuests,
+    hasBreakfast,
+    numNights
+  } = booking;
 
   const optionalBreafastPrice = settings * numNights * numGuests;
 

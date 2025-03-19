@@ -48,7 +48,11 @@ function CabinRow({ cabin }) {
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { isCreating, createCabin } = useCreateCabin();
 
+  // console.log(cabin.image);
+
   const { id: cabinId, name, maxCapacity, regularPrice, discount, image, description } = cabin;
+
+  // https://kslildlatomuctqsltnc.supabase.co/storage/v1/object/public/cabins-images//cabin-001.jpg
 
   const handleDuplicateCabin = () => {
     createCabin({
@@ -63,7 +67,7 @@ function CabinRow({ cabin }) {
 
   return (
     <Table.Row role="row">
-      <Img src={image} alt={name} />
+      <Img src={`${image}`} alt={name} />
       <Cabin>{name}</Cabin>
       <div>Fits up to {maxCapacity}</div>
       <Price>{formatCurrency(regularPrice)}</Price>

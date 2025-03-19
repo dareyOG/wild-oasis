@@ -76,9 +76,11 @@ function Open({ children, opens: opensWindowName }) {
 }
 
 function Window({ children, name }) {
-  const { openName, handleClose } = useContext(ModalContext);
+  // const { openName, handleClose } = useContext(ModalContext);
+  const context = useContext(ModalContext);
+  // console.log(context);
 
-  const ref = useOutsideClick(handleClose);
+  const ref = useOutsideClick(context?.handleClose);
 
   /*   const ref = useRef();
 
@@ -92,15 +94,15 @@ function Window({ children, name }) {
     return () => document.removeEventListener('click', handleClick, true);
   }, [handleClose]); */
 
-  if (name !== openName) return null;
+  if (name !== context?.openName) return null;
 
   return createPortal(
     <Overlay>
       <StyledModal ref={ref}>
-        <Button onClick={handleClose}>
+        <Button onClick={context?.handleClose}>
           <HiXMark />
         </Button>
-        <div>{cloneElement(children, { onCloseModal: handleClose })}</div>
+        <div>{cloneElement(children, { onCloseModal: context?.handleClose })}</div>
       </StyledModal>
     </Overlay>,
     document.body
