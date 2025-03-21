@@ -19,8 +19,7 @@ function LoginForm() {
 
     logIn(
       { email, password },
-
-      // clear log in details
+      // clear login details
       {
         onSettled: () => {
           setEmail('');

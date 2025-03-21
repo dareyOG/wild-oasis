@@ -10,10 +10,10 @@ export function useLogin({ email, password }) {
     mutationFn: () => login({ email, password }),
 
     onSuccess: user => {
-      console.log(user);
+      // console.log(user);
 
       toast.success('Logged In');
-      navigate('/dashboard');
+      navigate('/dashboard', { replace: true });
     },
 
     onError: err => {
