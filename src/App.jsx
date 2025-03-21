@@ -25,6 +25,7 @@ import Login from './pages/Login';
 import Settings from './pages/Settings';
 import Users from './pages/Users';
 import PageNotFound from './pages/PageNotFound';
+import ProtectedRoute from './ui/ProtectedRoute';
 
 /* const router = createBrowserRouter([
   {
@@ -83,7 +84,12 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout />}>
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }>
             {/* declarative redirect to dashboard */}
             <Route index element={<Navigate replace to={'dashboard'} />} />{' '}
             <Route path="dashboard" element={<Dashboard />} />
