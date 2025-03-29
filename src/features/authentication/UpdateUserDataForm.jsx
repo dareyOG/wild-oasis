@@ -24,12 +24,14 @@ function UpdateUserDataForm() {
   const [avatar, setAvatar] = useState(null);
 
   const { isUpdating, update } = useUpdateUser({ fullName, avatar });
+  // const { isUpdating, update } = useUpdateUser();
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!fullName) return;
 
     update();
+    // update({ fullName, avatar });
     e.target.reset();
   }
 
