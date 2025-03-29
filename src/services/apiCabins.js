@@ -13,7 +13,7 @@ export async function getCabins() {
 
 export async function createCabin(newCabin) {
   const imageName = `${newCabin.image.name}`.replace('/', '');
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabins-images//${imageName}`;
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabins-images/${imageName}`;
 
   // https://kslildlatomuctqsltnc.supabase.co/storage/v1/object/public/cabins-images/cabin-001.jpg
 
@@ -62,7 +62,7 @@ export async function updateCabin(cabin) {
   const imageName = `${cabin.image.name}`.replace('/', '');
   const imagePath = hasImagePath
     ? cabin.image
-    : `${supabaseUrl}/storage/v1/object/public/cabins-images//${imageName}`;
+    : `${supabaseUrl}/storage/v1/object/public/cabins-images/${imageName}`;
 
   const { data, error: updateError } = await supabase
     .from('cabins')
@@ -96,7 +96,7 @@ export async function createUpdateCabin(newCabin, id) {
   const imageName = `${newCabin.image.name}`.replace('/', '');
   const imagePath = hasImagePath
     ? newCabin.image
-    : `${supabaseUrl}/storage/v1/object/public/cabins-images//${imageName}`;
+    : `${supabaseUrl}/storage/v1/object/public/cabins-images/${imageName}`;
 
   // 1. create/edit cabin
 
@@ -133,5 +133,6 @@ export async function createUpdateCabin(newCabin, id) {
     // console.error(storageError);
     throw new Error('Cabin image could not be uploaded');
   }
+
   return data;
 }

@@ -8,7 +8,7 @@ export function useSignup() {
 
     onSuccess: user => {
       console.log(user);
-      toast.success('Account successfully created');
+      toast.success('Account successfully created; kindly verify your account with the link sent to your mail.');
     }
   });
 
