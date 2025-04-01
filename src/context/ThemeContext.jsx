@@ -4,7 +4,13 @@ import { useLocalStorageState } from '../hooks/useLocalStorageState';
 const ThemeContext = createContext();
 
 function ThemeProvider({ children }) {
-  const [isDark, setIsDark] = useLocalStorageState(false, 'isDarkMode');
+  // const [isDark, setIsDark] = useLocalStorageState(false, 'isDarkMode');
+
+  // match theme state based on operating system
+  const [isDark, setIsDark] = useLocalStorageState(
+    window.matchMedia('(prefers-color-scheme:dark)').matches,
+    'isDarkMode'
+  );
 
   useEffect(() => {
     const rootElement = document.documentElement;
