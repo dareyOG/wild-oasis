@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import {
+  Link
+  //  useNavigate
+} from 'react-router-dom';
 
 import CheckoutButton from './CheckoutButton';
 import Tag from '../../ui/Tag';
@@ -26,7 +29,7 @@ const Guest = styled.div`
 `;
 
 function TodayItem({ activity }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // console.log(activity);
   const { id, status, numNights, guests } = activity;
